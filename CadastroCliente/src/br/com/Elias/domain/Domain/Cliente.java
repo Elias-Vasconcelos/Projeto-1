@@ -14,12 +14,12 @@ public class Cliente {
     private String estado;
 
 
-    public Cliente(Long cpf, String nome, Long tel, String end, Integer numero, String cidade, String estado) {
-        this.cpf = cpf;
+    public Cliente(String cpf, String nome, String tel, String end, String numero, String cidade, String estado) {
+        this.cpf = Long.valueOf(cpf.trim());
         this.nome = nome;
-        this.tel = tel;
+        this.tel = Long.valueOf(cpf.trim());
         this.end = end;
-        this.numero = numero;
+        this.numero = Integer.valueOf(cpf.trim());
         this.cidade = cidade;
         this.estado = estado;
     }
