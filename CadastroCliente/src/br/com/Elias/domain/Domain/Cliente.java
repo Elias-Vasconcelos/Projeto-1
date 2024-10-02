@@ -15,11 +15,11 @@ public class Cliente {
 
 
     public Cliente(String cpf, String nome, String tel, String end, String numero, String cidade, String estado) {
-        this.cpf = Long.valueOf(cpf.trim());
+        this.cpf = Long.parseLong(cpf);
         this.nome = nome;
-        this.tel = Long.valueOf(cpf.trim());
+        this.tel = Long.parseLong(tel);
         this.end = end;
-        this.numero = Integer.valueOf(cpf.trim());
+        this.numero = Integer.parseInt(numero);
         this.cidade = cidade;
         this.estado = estado;
     }
