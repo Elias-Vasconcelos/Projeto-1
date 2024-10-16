@@ -257,11 +257,15 @@ import javax.swing.table.DefaultTableModel;
 
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
        int linha = tabelaClientes.getSelectedRow();
-       Cliente clinte = clienteDAO.consutar((Long) tabelaClientes.getValueAt(linha, 2));
+       Cliente clinte = clienteDAO.consutar((Long) tabelaClientes.getValueAt(linha, 1));
        
        
-       clienteDAO.excluir(clinte.getCpf());
-        
+       if(clinte != null){
+              clienteDAO.excluir(clinte.getCpf());
+              module.removeRow(linha);
+              limpaCampos();
+       }
+         
     }//GEN-LAST:event_BtnExcluirActionPerformed
 
     private void BtnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAtualizarActionPerformed
@@ -272,14 +276,22 @@ import javax.swing.table.DefaultTableModel;
     String cidade = txtCidade.getText();
     String endereco = txtEndereco.getText();
     String estado =  txtEstado.getText(); 
-    
+    int linha = tabelaClientes.getSelectedRow();
     Boolean validacao = isCamposValidos(cpf, nome, telefone, endereco, numero, cidade, estado);
     
     if(validacao){
          
         Cliente novasInforcoes = new Cliente(cpf, nome, telefone, endereco, numero, cidade, estado);
         
-        clienteDAO.alterar(novasInforcoes);
+         
+          if(novasInforcoes != null){
+              clienteDAO.alterar(novasInforcoes);
+              module.removeRow(linha);
+              module.addRow(new Object[]{ novasInforcoes.getNome(), novasInforcoes.getCpf(), novasInforcoes.getTel(), novasInforcoes.getEnd()  });
+              limpaCampos();
+            }
+        
+
     }
     
     }//GEN-LAST:event_BtnAtualizarActionPerformed
@@ -308,7 +320,7 @@ import javax.swing.table.DefaultTableModel;
 
     private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
        int linha = tabelaClientes.getSelectedRow();
-       Long cpf = (Long) tabelaClientes.getValueAt(linha, 2);
+       Long cpf = (Long) tabelaClientes.getValueAt(linha, 1);
        Cliente clinte = clienteDAO.consutar(cpf);
        
       
